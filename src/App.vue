@@ -117,6 +117,7 @@
             <div class="col-rank">排名</div>
             <div class="col-ip">IP 地址</div>
             <div class="col-location">归属地</div>
+            <div class="col-pages">访问页面</div>
             <div class="col-count">
               <span>🔥</span> 访问次数
             </div>
@@ -137,6 +138,14 @@
             </div>
             <div class="col-location">
               <span class="location-tag">📍 {{ item.location || '未知' }}</span>
+            </div>
+            <div class="col-pages">
+              <div class="pages-list">
+                <span v-for="(page, pIndex) in item.pages" 
+                :key="pIndex" class="page-tag">
+                  {{ page }}
+                </span>
+              </div>
             </div>
             <div class="col-count">
               <span class="count-value">{{ item.count }}</span>
@@ -236,7 +245,8 @@ export default {
           this.ipList = response.data.ipList.map(item => ({
             ip: item.ip,
             location: item.location,
-            count: item.count
+            count: item.count,
+            pages: item.pages || []
           }))
         }
         
@@ -472,7 +482,7 @@ body {
 
 .table-header {
   display: grid;
-  grid-template-columns: 80px 1.5fr 2fr 1fr;
+  grid-template-columns: 60px 1fr 2fr 2fr 100px;
   gap: 15px;
   padding: 18px 20px;
   background: linear-gradient(135deg, #667eea, #764ba2);
@@ -483,7 +493,7 @@ body {
 
 .table-row {
   display: grid;
-  grid-template-columns: 80px 1.5fr 2fr 1fr;
+  grid-template-columns: 60px 1fr 2fr 2fr 100px;
   gap: 15px;
   padding: 18px 20px;
   align-items: center;
@@ -567,6 +577,27 @@ body {
   border-radius: 8px;
   font-size: 14px;
   color: #333;
+  font-weight: 500;
+}
+
+.col-pages {
+  display: flex;
+  align-items: center;
+}
+
+.pages-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.page-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #faf089;
+  color: #744210;
+  border-radius: 4px;
+  font-size: 0.85em;
   font-weight: 500;
 }
 
