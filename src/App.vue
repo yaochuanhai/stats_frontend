@@ -59,6 +59,11 @@
 <script>
 import axios from 'axios'
 
+// 创建 axios 实例
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL
+})
+
 export default {
   name: 'App',
   data() {
@@ -86,7 +91,7 @@ export default {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.get('/api/stats/today')
+        const response = await api.get('/api/stats/today')
         this.stats = response.data
         
         // 处理页面统计数据
